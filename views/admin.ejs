@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, Admin</h1>
+
+        <div class="button-container">
+            <h2>Manage Users</h2>
+            <a href="/admin/add-employee" class="btn">Add Employee</a>
+            <a href="/admin/add-security" class="btn">Add Security Guard</a>
+            <a href="/admin/add-admin" class="btn">Add Admin</a>
+        </div>
+
+        <div class="button-container">
+            <a href="/admin/view-admins" class="btn">View Admins</a>
+            <a href="/admin/view-employees" class="btn">View Employees</a>
+            <a href="/admin/view-security" class="btn">View Security Guards</a>
+        </div>
+
+        <div class="button-container">
+            <h2>Manage Visitors</h2>
+            <a href="/admin/visitorApproval" class="btn">✅ Accept/Reject Security Visitors</a>
+            <a href="/admin/employee-visitorApproval" class="btn">✅ Accept/Reject Employee Visitors</a>
+            
+            <h2>History of visitors</h2>
+            <a href="/admin/visitor-history" class="btn">📜 View Visitor History</a>
+            <a href="/admin/employee-visitor-history" class="btn">📜 View Employee Visitor History</a>
+        </div>
+        
+
+
+        <button id="logoutBtn" class="btn logout-btn">🚪 Logout</button>
+    </div>
+
+    <script>
+        document.getElementById("logoutBtn").addEventListener("click", async function () {
+            try {
+                const response = await fetch("/api/auth/logout", {
+                    method: "POST",
+                    credentials: "include" 
+                });
+
+                if (response.ok) {
+                    window.location.href = "/api/auth/login"; 
+                } else {
+                    alert("Logout failed. Please try again.");
+                }
+            } catch (error) {
+                console.error("Logout error:", error);
+                alert("Something went wrong.");
+            }
+        });
+    </script>
+</body>
+</html>

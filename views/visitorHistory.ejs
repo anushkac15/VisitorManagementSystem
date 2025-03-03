@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor History</title>
+    <link rel="stylesheet" href="/css/visitorHistory.css">
+</head>
+<body>
+    <h2>Visitor History</h2>
+
+    <div class="history-container">
+        <% for (let date in history) { %>
+            <div class="date-section">
+                <h3><%= date %></h3>
+                <% history[date].forEach(visitor => { %>
+                    <div class="visitor-card <%= visitor.status.toLowerCase() %>">
+                        <div class="visitor-info">
+                            <strong><%= visitor.fullName %></strong> - <%= visitor.status %> <br>
+                            Contact: <%= visitor.contactInfo %> | Purpose: <%= visitor.purpose %> <br>
+                            Host: <%= visitor.hostName %> (Dept: <%= visitor.hostDepartment %>) <br>
+                            Check-in: <%= visitor.checkInTime %> | Check-out: <%= visitor.checkOutTime %> <br>
+                            <small>Updated at: <%= visitor.updatedAt ? visitor.updatedAt.toLocaleString() : "Unknown Date" %></small>
+                        </div>
+                        <% if (visitor.photoUrl) { %> 
+                            <img src="<%= visitor.photoUrl %>" alt="Visitor Image" class="visitor-image">
+                        <% } %>
+                    </div>
+                <% }); %>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>

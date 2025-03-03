@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard</title>
+    <link rel="stylesheet" href="/css/employeeDashboard.css">
+</head>
+<body>
+    <h2>Welcome, <%= employee.email %>!</h2>
+    <p>Email: <%= employee.email %></p>
+    <p>Role: Employee</p>
+
+    <a href="/employee/add-visitor">
+        <button>Add Visitor</button>
+    </a>
+
+    <a href="/employee/view-qr">
+        <button>View QR Codes</button>
+    </a>
+
+    <button id="logoutBtn">Logout</button>
+
+    <script>
+        document.getElementById("logoutBtn").addEventListener("click", async () => {
+            try {
+                const response = await fetch("/api/auth/logout", { method: "POST" });
+                if (response.ok) {
+                    window.location.href = "/api/auth/login";
+                } else {
+                    alert("Logout failed. Try again.");
+                }
+            } catch (error) {
+                console.error("❌ Logout Error:", error);
+                alert("Something went wrong!");
+            }
+        });
+    </script>
+</body>
+</html>
